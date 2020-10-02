@@ -20,10 +20,10 @@ public class Principal extends javax.swing.JFrame {
 
         for (int i = 0; i < listaAmigos.size(); i++) {
             Object linha[] = new Object[]{listaAmigos.get(i).getId(),
-                listaAmigos.get(i).getNome(),
-                listaAmigos.get(i).getNascimento(),
-                listaAmigos.get(i).getRg(),
-                listaAmigos.get(i).getCpf()};
+                                          listaAmigos.get(i).getNome(),
+                                          listaAmigos.get(i).getNascimento(),
+                                          listaAmigos.get(i).getRg(),
+                                          listaAmigos.get(i).getCpf()};
             modelo.addRow(linha);
         }
 
@@ -119,7 +119,7 @@ public class Principal extends javax.swing.JFrame {
                 c_nasc.setEnabled(false);
                 c_rg.setEnabled(false);
                 c_cpf.setEnabled(false);
-                btn_novo.setEnabled(true);
+                btn_novo.setEnabled(false);
                 btn_editar.setEnabled(true);
                 btn_excluir.setEnabled(true);
                 break;
@@ -189,6 +189,15 @@ public class Principal extends javax.swing.JFrame {
         tbl_Nomes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbl_Nomes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -397,15 +406,15 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(c_buscar)
                     .addComponent(btn_buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,7 +432,7 @@ public class Principal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1299, Short.MAX_VALUE)
+            .addGap(0, 1297, Short.MAX_VALUE)
         );
 
         tbl_pessoas.addTab("", jPanel2);
@@ -470,7 +479,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-
+        listaAmigos.clear();
         if (tbl_Nomes.getSelectedRow() != -1) {
 
             Pessoa p = new Pessoa();
@@ -536,6 +545,7 @@ public class Principal extends javax.swing.JFrame {
         c_nasc.setText("");
         c_rg.setText("");
         c_cpf.setText("");
+        
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     private void tbl_NomesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_NomesKeyReleased
@@ -566,16 +576,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void c_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_buscarActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_c_buscarActionPerformed
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        listaAmigos.clear();
         if (c_buscar.getText().equals("")) {
             listaAmigos.addAll(pDao.read());
         } else {
             listaAmigos.addAll(pDao.readForNome(c_buscar.getText()));
+            listaAmigos.addAll(pDao.readForId(c_buscar.getText()));
+            listaAmigos.addAll(pDao.readForRg(c_buscar.getText()));
+            listaAmigos.addAll(pDao.readForCpf(c_buscar.getText()));
         }
         readTablePessoa();
-
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_buscarActionPerformed
 

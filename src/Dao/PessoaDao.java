@@ -61,18 +61,18 @@ public class PessoaDao {
             stmt = con.prepareCall("SELECT * FROM cadastro");
             rs = stmt.executeQuery();
             
-       while(rs.next()){
-           
-           Pessoa pessoa = new Pessoa();
-           
-           pessoa.setId(rs.getInt("id"));
-           pessoa.setNome(rs.getString("nome"));
-           pessoa.setNascimento(rs.getString("nascimento"));
-           pessoa.setRg(rs.getString("rg"));
-           pessoa.setCpf(rs.getString("cpf"));
-           pessoas.add(pessoa);
-       }
-            
+            while(rs.next()){
+
+                Pessoa pessoa = new Pessoa();
+
+                pessoa.setId(rs.getInt("id"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setNascimento(rs.getString("nascimento"));
+                pessoa.setRg(rs.getString("rg"));
+                pessoa.setCpf(rs.getString("cpf"));
+                pessoas.add(pessoa);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
@@ -116,6 +116,113 @@ public class PessoaDao {
       
         return pessoas;
     }
+    
+    public List<Pessoa> readForId(String id){
+       
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Pessoa> pessoas = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareCall("SELECT * FROM cadastro WHERE id = ?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            
+       while(rs.next()){
+           
+           Pessoa pessoa = new Pessoa();
+           
+           pessoa.setId(rs.getInt("id"));
+           pessoa.setNome(rs.getString("nome"));
+           pessoa.setNascimento(rs.getString("nascimento"));
+           pessoa.setRg(rs.getString("rg"));
+           pessoa.setCpf(rs.getString("cpf"));
+           pessoas.add(pessoa);
+       }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+      
+        return pessoas;
+    }
+    
+    
+    public List<Pessoa> readForRg(String rg){
+       
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Pessoa> pessoas = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareCall("SELECT * FROM cadastro WHERE rg = ?");
+            stmt.setString(1, rg);
+            rs = stmt.executeQuery();
+            
+       while(rs.next()){
+           
+           Pessoa pessoa = new Pessoa();
+           
+           pessoa.setId(rs.getInt("id"));
+           pessoa.setNome(rs.getString("nome"));
+           pessoa.setNascimento(rs.getString("nascimento"));
+           pessoa.setRg(rs.getString("rg"));
+           pessoa.setCpf(rs.getString("cpf"));
+           pessoas.add(pessoa);
+       }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+      
+        return pessoas;
+    }
+    
+    public List<Pessoa> readForCpf(String cpf){
+       
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Pessoa> pessoas = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareCall("SELECT * FROM cadastro WHERE cpf = ?");
+            stmt.setString(1, cpf);
+            rs = stmt.executeQuery();
+            
+       while(rs.next()){
+           
+           Pessoa pessoa = new Pessoa();
+           
+           pessoa.setId(rs.getInt("id"));
+           pessoa.setNome(rs.getString("nome"));
+           pessoa.setNascimento(rs.getString("nascimento"));
+           pessoa.setRg(rs.getString("rg"));
+           pessoa.setCpf(rs.getString("cpf"));
+           pessoas.add(pessoa);
+       }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+      
+        return pessoas;
+    }
+    
     
     public void update(Pessoa p){
         
